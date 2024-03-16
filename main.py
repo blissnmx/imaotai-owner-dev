@@ -5,11 +5,9 @@ import sys
 import config
 import login
 import process
-from datetime import datetime
-
 
 DATE_FORMAT = "%m/%d/%Y %H:%M:%S %p"
-logging.basicConfig(level=logging.INFO,
+logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s  %(filename)s : %(levelname)s  %(message)s',  # 定义输出log的格式
                     stream=sys.stdout,
                     datefmt=DATE_FORMAT)
@@ -22,16 +20,6 @@ if len(configs.sections()) == 0:
     logging.error("配置文件未找到配置")
     sys.exit(1)
 
-
-# 获取当前日期和时间
-current_time = datetime.now()
-
-# 格式化日期和时间为 '年-月-日 时:分:秒' 的形式
-formatted_time = current_time.strftime('%Y-%m-%d %H:%M:%S')
-
-
-# 打印包含日期时间和最大商店ID的信息
-print(f'{formatted_time} - max shop id : {max_shop_id}')
 for section in configs.sections():
     mobile = section
     province = configs.get(section, 'province')
@@ -56,7 +44,7 @@ for section in configs.sections():
                                                      source_data=source_data,
                                                      lat=lat,
                                                      lng=lng)
-            print(f'{formatted_time}max shop id : {max_shop_id}')
+            logging.info(f'max shop id : {max_shop_id}')
             if max_shop_id == '0':
                 continue
             shop_info = source_data.get(str(max_shop_id))
