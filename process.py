@@ -5,6 +5,7 @@ import random
 import re
 import time
 import config
+import notice
 from encrypt import Encrypt
 import requests
 import hashlib
@@ -228,17 +229,18 @@ def act_params(shop_id: str, item_id: str):
     params.update({"actParam": act})
     return params
 
-
+# 此方法修改为制定消息平台，并非发送邮件
 def send_email(msg: str):
     if config.PUSH_TOKEN is None:
         return
-    title = 'imoutai预约失败'  # 改成你要的标题内容
-    content = msg  # 改成你要的正文内容
-    url = 'http://www.pushplus.plus/send'
-    r = requests.get(url, params={'token': config.PUSH_TOKEN,
-                                  'title': title,
-                                  'content': content})
-    logging.info(f'通知推送结果：{r.status_code, r.text}')
+    # title = 'imoutai预约失败'  # 改成你要的标题内容
+    # content = msg  # 改成你要的正文内容
+    # url = 'http://www.pushplus.plus/send'
+    # r = requests.get(url, params={'token': config.PUSH_TOKEN,
+    #                               'title': title,
+    #                               'content': content})
+    notice.sendXZ(config.PUSH_TOKEN,msg=msg)
+    #logging.info(f'通知推送结果：{r.status_code, r.text}')
 
 
 def reservation(params: dict, mobile: str):
