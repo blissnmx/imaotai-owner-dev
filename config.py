@@ -14,7 +14,7 @@ ITEM_CODES = ['10941', '10942']
 ########################
 # 不填不推送消息，一对一发送
 #PUSH_TOKEN = None
-PUSH_TOKEN = "https://xz.wps.cn/api/v1/webhook/send?key=ee59776be7915c7602f4fa2bbd2ccaa6"
+PUSH_TOKEN = ""
 ########################
 
 # credentials 路径，例如：CREDENTIALS_PATH = /home/user/.imoutai/credentials
