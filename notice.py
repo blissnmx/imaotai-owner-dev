@@ -1,13 +1,13 @@
 import requests
 import json
 
-def sendXZ(url):
+def sendXZ(url,msg):
 
     # 你的数据内容
     data = {
         "msgtype": "text",
         "text": {
-            "content": "茅台预约成功提醒！"
+            "content": ""+msg+""
         }
     }
 

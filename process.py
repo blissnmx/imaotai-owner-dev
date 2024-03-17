@@ -132,8 +132,8 @@ def get_location_count(province: str,
                        item_code: str,
                        p_c_map: dict,
                        source_data: dict,
-                       lat: str = '28.499562',
-                       lng: str = '102.182324'):
+                       lat: str ,
+                       lng: str):
     day_time = get_day_time()
     session_id = headers['current_session_id']
     responses = requests.get(
@@ -142,7 +142,7 @@ def get_location_count(province: str,
         logging.warning(
             f'get_location_count : params : {day_time}, response code : {responses.status_code}, response body : {responses.text}')
     shops = responses.json()['data']['shops']
-
+    logging.info(f"shops : {shops}")
     if config.MAX_ENABLED:
         return max_shop(city, item_code, p_c_map, province, shops)
     if config.DISTANCE_ENABLED:
