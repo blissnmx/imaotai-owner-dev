@@ -231,6 +231,7 @@ def act_params(shop_id: str, item_id: str):
 
 # 此方法修改为制定消息平台，并非发送邮件
 def send_email(msg: str):
+    logging.info("send msg to xz")
     if config.PUSH_TOKEN is None:
         return
     # title = 'imoutai预约失败'  # 改成你要的标题内容
@@ -255,6 +256,9 @@ def reservation(params: dict, mobile: str):
         raise RuntimeError
     logging.info(
         f'预约 : mobile:{mobile} :  response code : {responses.status_code}, response body : {responses.text}')
+    send_email(f'[{mobile}],{responses.text}')
+
+
 
 
 def select_geo(i: str):
